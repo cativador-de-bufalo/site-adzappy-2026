@@ -1,0 +1,1399 @@
+<!doctype html>
+<html class="light" lang="pt-br">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>AdZappy: Performance e Dados</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&family=Noto+Sans:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#ff5508",
+              "background-light": "#f8f8f5",
+              "background-dark": "#1a1a1a",
+              "text-main": "#181811",
+            },
+            fontFamily: {
+              display: ["Spline Sans", "sans-serif"],
+              body: ["Noto Sans", "sans-serif"],
+            },
+            borderRadius: {
+              DEFAULT: "1rem",
+              lg: "2rem",
+              xl: "3rem",
+              full: "9999px",
+            },
+            animation: {
+              "marquee-slide": "marquee-slide 40s linear infinite",
+            },
+            keyframes: {
+              "marquee-slide": {
+                "0%": { transform: "translateX(0)" },
+                "100%": { transform: "translateX(-50%)" },
+              },
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="stylesheet" href="style.css" />
+    <script src="main.js" defer></script>
+  </head>
+
+  <body
+    class="bg-background-light dark:bg-background-dark font-display text-text-main dark:text-white antialiased overflow-x-hidden selection:bg-primary selection:text-white select-text print:overflow-visible"
+  >
+    <div
+      class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-[#f5f5f0]"
+    >
+      <div
+        class="px-5 md:px-10 py-3 flex items-center justify-between max-w-[1280px] mx-auto"
+      >
+        <a href="#" aria-label="Início"
+          ><img
+            src="https://adzappy.com/imgs/logo-ho.png"
+            alt="AdZappy"
+            class="h-8 w-auto"
+        /></a>
+        <div class="hidden md:flex items-center gap-8">
+          <a
+            class="text-text-main hover:text-primary text-sm font-medium transition-colors"
+            href="#metodo"
+            >Método</a
+          >
+          <a
+            class="text-text-main hover:text-primary text-sm font-medium transition-colors"
+            href="#ecosystem"
+            >Ecossistema</a
+          >
+          <a
+            class="text-text-main hover:text-primary text-sm font-medium transition-colors"
+            href="#scenarios"
+            >Na prática</a
+          >
+          <div class="relative group">
+            <button
+              class="flex items-center gap-0.5 text-text-main hover:text-primary text-sm font-medium transition-colors"
+            >
+              Adzappy Studio
+              <span
+                class="material-symbols-outlined transition-transform duration-200 group-hover:rotate-180"
+                style="font-size: 14px; line-height: 1"
+                >expand_more</span
+              >
+            </button>
+            <div
+              class="absolute top-full left-1/2 -translate-x-1/2 pt-2 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-150 z-50"
+            >
+              <div
+                class="bg-white rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.12)] border border-black/5 overflow-hidden w-44 py-1"
+              >
+                <a
+                  href="studio.html"
+                  class="flex items-center justify-between px-4 py-2.5 text-sm font-medium text-[#181811] hover:text-primary hover:bg-[#fff5f0] transition-colors"
+                >
+                  Versão 1
+                  <span
+                    class="text-[10px] font-bold bg-gray-100 text-gray-400 px-1.5 py-0.5 rounded-full"
+                    >v1</span
+                  >
+                </a>
+                <a
+                  href="studio-v2.html"
+                  class="flex items-center justify-between px-4 py-2.5 text-sm font-medium text-[#181811] hover:text-primary hover:bg-[#fff5f0] transition-colors"
+                >
+                  Versão 2
+                  <span
+                    class="text-[10px] font-bold bg-primary/10 text-primary px-1.5 py-0.5 rounded-full"
+                    >v2</span
+                  >
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a
+          href="#contato"
+          class="flex cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-6 bg-primary hover:bg-[#e04804] transition-colors text-white text-sm font-bold shadow-md shadow-orange-500/20"
+        >
+          <span class="truncate">Falar com a Adzappy</span>
+        </a>
+      </div>
+    </div>
+    <div class="pt-16">
+      <!-- HERO -->
+      <section
+        class="relative w-full py-16 md:py-24 lg:py-32 px-5 md:px-10 flex flex-col items-center text-center bg-black overflow-hidden"
+      >
+        <div class="max-w-[1280px] mx-auto flex flex-col items-center gap-6">
+          <div
+            class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gray-800 border border-gray-700"
+          >
+            <span class="relative flex h-2 w-2">
+              <span
+                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"
+              ></span>
+              <span
+                class="relative inline-flex rounded-full h-2 w-2 bg-primary"
+              ></span>
+            </span>
+            <span
+              class="text-xs font-semibold uppercase tracking-wide text-gray-300"
+              >Diagnósticos abertos para 2026</span
+            >
+          </div>
+          <h1
+            class="text-5xl md:text-7xl font-black leading-[1.1] tracking-tighter text-white"
+          >
+            Ecossistema de mídia
+            <span
+              class="relative inline-block z-10 before:content-[''] before:absolute before:-bottom-1 before:left-0 before:w-full before:h-3 before:bg-primary before:-z-10 before:-skew-y-1"
+              >integrada.</span
+            >
+          </h1>
+          <p class="text-lg md:text-xl text-gray-300 max-w-2xl font-medium">
+            Estruturamos canais, dados e estratégia dentro de um mesmo sistema
+            de decisão para marcas que precisam executar mídia com consistência
+            e controle.
+          </p>
+          <div
+            class="flex flex-col sm:flex-row gap-4 mt-4 w-full justify-center"
+          >
+            <a
+              href="#contato"
+              class="btn-glass-primary flex min-w-[200px] cursor-pointer items-center justify-center rounded-full h-14 px-8 text-white hover:scale-105 transition-all text-base font-bold shadow-lg shadow-orange-500/30"
+            >
+              Quero conversar
+            </a>
+            <a
+              href="#metodo"
+              class="btn-glass-secondary flex min-w-[200px] cursor-pointer items-center justify-center rounded-full h-14 px-8 text-white text-base font-bold transition-all hover:scale-105"
+            >
+              Ver como funciona
+            </a>
+          </div>
+        </div>
+        <!-- Parallax Star Background -->
+        <div id="stars"></div>
+        <div id="stars2"></div>
+        <div id="stars3"></div>
+      </section>
+
+      <!-- LOGOS BAR -->
+      <section
+        class="border-y border-gray-100 dark:border-gray-800 bg-background-light dark:bg-black py-8 overflow-hidden"
+      >
+        <div class="max-w-[1280px] mx-auto px-5 md:px-10 mb-6">
+          <p
+            class="text-center text-sm font-semibold text-gray-400 uppercase tracking-widest"
+          >
+            Empresas e agências que confiam na AdZappy
+          </p>
+        </div>
+
+        <div class="relative eco-mask">
+          <div
+            class="flex w-max animate-marquee-slide py-4 hover:[animation-play-state:paused] transition-all"
+          >
+            <!-- ORIGINAL SET -->
+            <div
+              class="flex items-center justify-around w-max gap-8 md:gap-16 px-4 md:px-8 shrink-0"
+            >
+              <img
+                src="https://cdn.sites.admitad.com/www.admitad.com/2025/07/JMj8Iehn-brandaliexpress-true-colorno.svg"
+                alt="AliExpress"
+                class="h-8 md:h-10 w-auto object-contain opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+              />
+              <img
+                src="https://cdn.sites.admitad.com/www.admitad.com/2025/07/9YSUHqli-brandshein-true-colorno.svg"
+                alt="Shein"
+                class="h-8 md:h-10 w-auto object-contain opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+              />
+              <img
+                src="https://cdn.sites.admitad.com/www.admitad.com/2025/07/wmXk1S2O-brandshoppe-true-colorno.svg"
+                alt="Shopee"
+                class="h-8 md:h-10 w-auto object-contain opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+              />
+              <img
+                src="https://cdn.sites.admitad.com/www.admitad.com/2025/07/jieDPZUc-brandtemu-true-colorno.svg"
+                alt="Temu"
+                class="h-8 md:h-10 w-auto object-contain opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+              />
+              <img
+                src="https://cdn.sites.admitad.com/www.admitad.com/2025/07/JquzL6tb-brandmoveis-linhares-true-colorno.svg"
+                alt="Móveis Linhares"
+                class="h-8 md:h-10 w-auto object-contain opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+              />
+              <img
+                src="https://cdn.sites.admitad.com/www.admitad.com/2025/07/cX92xVRu-brandbooking-true-colorno.svg"
+                alt="Booking.com"
+                class="h-8 md:h-10 w-auto object-contain opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+              />
+              <img
+                src="https://cdn.sites.admitad.com/www.admitad.com/2025/07/UfxtcZgU-brandmaxmilhas-true-colorno.svg"
+                alt="MaxMilhas"
+                class="h-8 md:h-10 w-auto object-contain opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+              />
+              <img
+                src="https://cdn.sites.admitad.com/www.admitad.com/2025/07/wTCMo4Ih-brandbarcelo-true-colorno.svg"
+                alt="Barceló"
+                class="h-8 md:h-10 w-auto object-contain opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+              />
+              <img
+                src="https://cdn.sites.admitad.com/www.admitad.com/2025/07/N3qSK83f-brandbuse-true-colorno.svg"
+                alt="Buser"
+                class="h-8 md:h-10 w-auto object-contain opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+              />
+              <img
+                src="https://cdn.sites.admitad.com/www.admitad.com/2025/07/GPhF7Ueb-brandmovida-true-colorno.svg"
+                alt="Movida"
+                class="h-8 md:h-10 w-auto object-contain opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+              />
+              <img
+                src="https://cdn.sites.admitad.com/www.admitad.com/2025/07/cyu3PMQt-brandgran-true-colorno.svg"
+                alt="Gran"
+                class="h-8 md:h-10 w-auto object-contain opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+              />
+              <img
+                src="https://cdn.sites.admitad.com/www.admitad.com/2025/07/1eL8ape5-branddisney-true-colorno.svg"
+                alt="Disney"
+                class="h-8 md:h-10 w-auto object-contain opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+              />
+              <img
+                src="https://cdn.sites.admitad.com/www.admitad.com/2025/07/yVudJ72l-brandveja-true-colorno.svg"
+                alt="Veja"
+                class="h-8 md:h-10 w-auto object-contain opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+              />
+            </div>
+
+            <!-- DUPLICATE SET -->
+            <div
+              class="flex items-center justify-around w-max gap-8 md:gap-16 px-4 md:px-8 shrink-0"
+              aria-hidden="true"
+            >
+              <img
+                src="https://cdn.sites.admitad.com/www.admitad.com/2025/07/JMj8Iehn-brandaliexpress-true-colorno.svg"
+                alt="AliExpress"
+                class="h-8 md:h-10 w-auto object-contain opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+              />
+              <img
+                src="https://cdn.sites.admitad.com/www.admitad.com/2025/07/9YSUHqli-brandshein-true-colorno.svg"
+                alt="Shein"
+                class="h-8 md:h-10 w-auto object-contain opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+              />
+              <img
+                src="https://cdn.sites.admitad.com/www.admitad.com/2025/07/wmXk1S2O-brandshoppe-true-colorno.svg"
+                alt="Shopee"
+                class="h-8 md:h-10 w-auto object-contain opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+              />
+              <img
+                src="https://cdn.sites.admitad.com/www.admitad.com/2025/07/jieDPZUc-brandtemu-true-colorno.svg"
+                alt="Temu"
+                class="h-8 md:h-10 w-auto object-contain opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+              />
+              <img
+                src="https://cdn.sites.admitad.com/www.admitad.com/2025/07/JquzL6tb-brandmoveis-linhares-true-colorno.svg"
+                alt="Móveis Linhares"
+                class="h-8 md:h-10 w-auto object-contain opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+              />
+              <img
+                src="https://cdn.sites.admitad.com/www.admitad.com/2025/07/cX92xVRu-brandbooking-true-colorno.svg"
+                alt="Booking.com"
+                class="h-8 md:h-10 w-auto object-contain opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+              />
+              <img
+                src="https://cdn.sites.admitad.com/www.admitad.com/2025/07/UfxtcZgU-brandmaxmilhas-true-colorno.svg"
+                alt="MaxMilhas"
+                class="h-8 md:h-10 w-auto object-contain opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+              />
+              <img
+                src="https://cdn.sites.admitad.com/www.admitad.com/2025/07/wTCMo4Ih-brandbarcelo-true-colorno.svg"
+                alt="Barceló"
+                class="h-8 md:h-10 w-auto object-contain opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+              />
+              <img
+                src="https://cdn.sites.admitad.com/www.admitad.com/2025/07/N3qSK83f-brandbuse-true-colorno.svg"
+                alt="Buser"
+                class="h-8 md:h-10 w-auto object-contain opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+              />
+              <img
+                src="https://cdn.sites.admitad.com/www.admitad.com/2025/07/GPhF7Ueb-brandmovida-true-colorno.svg"
+                alt="Movida"
+                class="h-8 md:h-10 w-auto object-contain opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+              />
+              <img
+                src="https://cdn.sites.admitad.com/www.admitad.com/2025/07/cyu3PMQt-brandgran-true-colorno.svg"
+                alt="Gran"
+                class="h-8 md:h-10 w-auto object-contain opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+              />
+              <img
+                src="https://cdn.sites.admitad.com/www.admitad.com/2025/07/1eL8ape5-branddisney-true-colorno.svg"
+                alt="Disney"
+                class="h-8 md:h-10 w-auto object-contain opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+              />
+              <img
+                src="https://cdn.sites.admitad.com/www.admitad.com/2025/07/yVudJ72l-brandveja-true-colorno.svg"
+                alt="Veja"
+                class="h-8 md:h-10 w-auto object-contain opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROBLEMS -->
+      <section
+        class="py-20 px-5 md:px-10 bg-white dark:bg-background-dark"
+        id="problems"
+      >
+        <div class="max-w-[1280px] mx-auto">
+          <div class="mb-12 text-center max-w-4xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-black mb-4">
+              O problema não é a mídia. É como ela é estruturada.
+            </h2>
+            <p class="text-gray-600 dark:text-gray-400 text-lg">
+              Quando canais operam de forma independente, decisões também se
+              fragmentam.
+            </p>
+          </div>
+          <div
+            class="bg-background-light dark:bg-[#1a1a1a] rounded-xl overflow-hidden shadow-sm border border-gray-100 dark:border-gray-800"
+          >
+            <div class="grid grid-cols-1 md:grid-cols-2">
+              <div
+                class="p-8 md:p-12 border-b md:border-b-0 md:border-r border-gray-200 dark:border-gray-700"
+              >
+                <h3
+                  class="text-red-500 dark:text-red-400 text-sm font-bold uppercase tracking-widest mb-6"
+                >
+                  🔴 Estrutura Fragmentada
+                </h3>
+                <ul class="space-y-6">
+                  <li class="flex items-start gap-3 opacity-80">
+                    <span
+                      class="material-symbols-outlined text-red-500 shrink-0"
+                      >close</span
+                    >
+                    <div>
+                      <strong class="block text-text-main dark:text-white"
+                        >Decisões por canal</strong
+                      >
+                      <span class="text-sm text-gray-500"
+                        >Cada frente otimiza sua própria métrica, sem visão do
+                        impacto no conjunto.</span
+                      >
+                    </div>
+                  </li>
+                  <li class="flex items-start gap-3 opacity-80">
+                    <span
+                      class="material-symbols-outlined text-red-500 shrink-0"
+                      >close</span
+                    >
+                    <div>
+                      <strong class="block text-text-main dark:text-white"
+                        >Leitura isolada de dados</strong
+                      >
+                      <span class="text-sm text-gray-500"
+                        >Relatórios separados dificultam entender a relação real
+                        entre investimento e resultado.</span
+                      >
+                    </div>
+                  </li>
+                  <li class="flex items-start gap-3 opacity-80">
+                    <span
+                      class="material-symbols-outlined text-red-500 shrink-0"
+                      >close</span
+                    >
+                    <div>
+                      <strong class="block text-text-main dark:text-white"
+                        >Otimização local</strong
+                      >
+                      <span class="text-sm text-gray-500"
+                        >Melhorias pontuais nem sempre geram ganho
+                        estratégico.</span
+                      >
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div
+                class="p-8 md:p-12 bg-white dark:bg-black relative overflow-hidden group"
+              >
+                <div
+                  class="absolute top-0 right-0 w-32 h-32 bg-green-500/10 rounded-bl-full -z-0"
+                ></div>
+                <h3
+                  class="text-green-600 dark:text-green-500 text-sm font-bold uppercase tracking-widest mb-6 relative z-10"
+                >
+                  🟢 Estrutura Integrada
+                </h3>
+                <ul class="space-y-6 relative z-10">
+                  <li class="flex items-start gap-3">
+                    <span
+                      class="material-symbols-outlined text-green-600 dark:text-green-500 shrink-0"
+                      >check_circle</span
+                    >
+                    <div>
+                      <strong
+                        class="block text-text-main dark:text-white text-lg"
+                        >Direção única</strong
+                      >
+                      <span class="text-sm text-gray-600 dark:text-gray-300"
+                        >Todos os canais operam sob o mesmo objetivo
+                        estratégico.</span
+                      >
+                    </div>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <span
+                      class="material-symbols-outlined text-green-600 dark:text-green-500 shrink-0"
+                      >check_circle</span
+                    >
+                    <div>
+                      <strong
+                        class="block text-text-main dark:text-white text-lg"
+                        >Dados conectados</strong
+                      >
+                      <span class="text-sm text-gray-600 dark:text-gray-300"
+                        >A leitura consolidada permite decisões mais
+                        consistentes.</span
+                      >
+                    </div>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <span
+                      class="material-symbols-outlined text-green-600 dark:text-green-500 shrink-0"
+                      >check_circle</span
+                    >
+                    <div>
+                      <strong
+                        class="block text-text-main dark:text-white text-lg"
+                        >Otimização sistêmica</strong
+                      >
+                      <span class="text-sm text-gray-600 dark:text-gray-300"
+                        >A performance é avaliada pelo impacto global, não por
+                        métricas isoladas.</span
+                      >
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- MÉTODO -->
+      <section
+        class="py-20 px-5 md:px-10 bg-black border-t border-gray-900 relative overflow-hidden group"
+        id="metodo"
+      >
+        <!-- Architectural Blueprint Background -->
+        <div class="absolute inset-0 z-0 overflow-hidden">
+          <div
+            class="absolute inset-0 origin-top [transform:perspective(1000px)_rotateX(60deg)_translateY(-200px)_scale(2)] opacity-40 pointer-events-none"
+          >
+            <div
+              class="absolute inset-0 bg-[linear-gradient(to_right,#334155_1px,transparent_1px),linear-gradient(to_bottom,#334155_1px,transparent_1px)] bg-[size:60px_60px] animate-grid-flow"
+            ></div>
+          </div>
+          <div class="absolute inset-0 pointer-events-none">
+            <div
+              class="absolute bottom-0 left-[20%] w-[1px] h-full bg-gradient-to-t from-transparent via-[#f56300] to-transparent opacity-0 animate-construction-line"
+            ></div>
+            <div
+              class="absolute bottom-0 right-[20%] w-[1px] h-full bg-gradient-to-t from-transparent via-blue-500 to-transparent opacity-0 animate-construction-line delay-700"
+            ></div>
+            <div
+              class="absolute top-[30%] left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent animate-scan-horizontal"
+            ></div>
+          </div>
+          <div
+            class="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/60 pointer-events-none"
+          ></div>
+          <div
+            class="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_20%,black_90%)] pointer-events-none"
+          ></div>
+        </div>
+        <div class="max-w-[1280px] mx-auto relative z-10">
+          <div class="mb-12 text-center max-w-3xl mx-auto">
+            <p
+              class="text-[#f56300] font-bold uppercase tracking-widest text-xs mb-4"
+            >
+              O método
+            </p>
+            <h2
+              class="text-3xl md:text-5xl font-black text-white tracking-tighter leading-tight"
+            >
+              Diagnosticar.<br />Arquitetar. Operar.
+            </h2>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div
+              class="bg-[#1c1c1e] rounded-[32px] p-8 flex flex-col items-start gap-6 hover:scale-[1.02] transition-transform duration-500 group border border-white/5"
+            >
+              <div
+                class="size-14 rounded-2xl bg-[#2c2c2e] flex items-center justify-center text-[#f56300]"
+              >
+                <span class="material-symbols-outlined text-2xl">search</span>
+              </div>
+              <div>
+                <h3 class="text-2xl font-bold text-white mb-2 tracking-tight">
+                  Diagnosticar
+                </h3>
+                <p class="text-[#f56300] font-semibold text-base mb-3">
+                  Entender antes de investir.
+                </p>
+                <p class="text-gray-400 text-sm leading-relaxed font-medium">
+                  Analisamos estágio da marca, objetivo real, restrições e dados
+                  disponíveis para identificar o que precisa ser resolvido.
+                </p>
+              </div>
+            </div>
+            <div
+              class="bg-[#1c1c1e] rounded-[32px] p-8 flex flex-col items-start gap-6 hover:scale-[1.02] transition-transform duration-500 group border border-white/5"
+            >
+              <div
+                class="size-14 rounded-2xl bg-[#2c2c2e] flex items-center justify-center text-[#f56300]"
+              >
+                <span class="material-symbols-outlined text-2xl"
+                  >architecture</span
+                >
+              </div>
+              <div>
+                <h3 class="text-2xl font-bold text-white mb-2 tracking-tight">
+                  Arquitetar
+                </h3>
+                <p class="text-[#f56300] font-semibold text-base mb-3">
+                  Organizar antes de escalar.
+                </p>
+                <p class="text-gray-400 text-sm leading-relaxed font-medium">
+                  Definimos o papel de cada canal e como eles se conectam dentro
+                  de um sistema único de decisão.
+                </p>
+              </div>
+            </div>
+            <div
+              class="bg-[#1c1c1e] rounded-[32px] p-8 flex flex-col items-start gap-6 hover:scale-[1.02] transition-transform duration-500 group border border-white/5"
+            >
+              <div
+                class="size-14 rounded-2xl bg-[#2c2c2e] flex items-center justify-center text-[#f56300]"
+              >
+                <span class="material-symbols-outlined text-2xl"
+                  >settings_motion_mode</span
+                >
+              </div>
+              <div>
+                <h3 class="text-2xl font-bold text-white mb-2 tracking-tight">
+                  Operar
+                </h3>
+                <p class="text-[#f56300] font-semibold text-base mb-3">
+                  Executar como sistema.
+                </p>
+                <p class="text-gray-400 text-sm leading-relaxed font-medium">
+                  Ativamos os canais com coordenação estratégica e otimização
+                  orientada pelo impacto global.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ECOSYSTEM -->
+      <section
+        class="py-20 bg-gray-50 dark:bg-black overflow-hidden"
+        id="ecosystem"
+      >
+        <div class="max-w-[1280px] mx-auto px-5 md:px-10">
+          <div class="mb-12 text-center">
+            <h2 class="text-3xl md:text-4xl font-black mb-4">
+              <span class="eco-highlight"
+                >Canais diferentes. Estratégia única.</span
+              >
+            </h2>
+            <p class="text-gray-600 dark:text-gray-400 text-lg">
+              Canais distintos operando dentro do mesmo sistema de decisão.
+            </p>
+          </div>
+        </div>
+        <div class="relative eco-mask">
+          <div class="eco-track py-4">
+            <!-- ORIGINAL SET -->
+            <div
+              class="flex-shrink-0 w-[320px] mx-3 p-8 rounded-2xl bg-white dark:bg-[#1a1a1a] border border-gray-100 dark:border-gray-800 hover:border-orange-400/50 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group flex flex-col items-start gap-4"
+            >
+              <div
+                class="size-14 rounded-xl bg-gray-50 dark:bg-black flex items-center justify-center group-hover:bg-orange-50 transition-colors"
+              >
+                <span
+                  class="material-symbols-outlined text-3xl text-gray-400 group-hover:text-[#ff5508] transition-colors"
+                  >extension</span
+                >
+              </div>
+              <div>
+                <h3 class="font-bold text-xl mb-2">Mídia Programática</h3>
+                <p class="text-sm text-gray-500 leading-relaxed">
+                  Ativação estruturada para gerar alcance qualificado e reforçar
+                  consistência.
+                </p>
+              </div>
+            </div>
+            <div
+              class="flex-shrink-0 w-[320px] mx-3 p-8 rounded-2xl bg-white dark:bg-[#1a1a1a] border border-gray-100 dark:border-gray-800 hover:border-orange-400/50 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group flex flex-col items-start gap-4"
+            >
+              <div
+                class="size-14 rounded-xl bg-gray-50 dark:bg-black flex items-center justify-center group-hover:bg-orange-50 transition-colors"
+              >
+                <span
+                  class="material-symbols-outlined text-3xl text-gray-400 group-hover:text-[#ff5508] transition-colors"
+                  >smartphone</span
+                >
+              </div>
+              <div>
+                <h3 class="font-bold text-xl mb-2">Mobile (MMP)</h3>
+                <p class="text-sm text-gray-500 leading-relaxed">
+                  Aquisição orientada a dados para apps, conectando instalação e
+                  retenção.
+                </p>
+              </div>
+            </div>
+            <div
+              class="flex-shrink-0 w-[320px] mx-3 p-8 rounded-2xl bg-white dark:bg-[#1a1a1a] border border-gray-100 dark:border-gray-800 hover:border-orange-400/50 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group flex flex-col items-start gap-4"
+            >
+              <div
+                class="size-14 rounded-xl bg-gray-50 dark:bg-black flex items-center justify-center group-hover:bg-orange-50 transition-colors"
+              >
+                <span
+                  class="material-symbols-outlined text-3xl text-gray-400 group-hover:text-[#ff5508] transition-colors"
+                  >mail</span
+                >
+              </div>
+              <div>
+                <h3 class="font-bold text-xl mb-2">E-mail Marketing</h3>
+                <p class="text-sm text-gray-500 leading-relaxed">
+                  Base segmentada e ativação direcionada para conversão e
+                  reativação.
+                </p>
+              </div>
+            </div>
+            <div
+              class="flex-shrink-0 w-[320px] mx-3 p-8 rounded-2xl bg-white dark:bg-[#1a1a1a] border border-gray-100 dark:border-gray-800 hover:border-orange-400/50 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group flex flex-col items-start gap-4"
+            >
+              <div
+                class="size-14 rounded-xl bg-gray-50 dark:bg-black flex items-center justify-center group-hover:bg-orange-50 transition-colors"
+              >
+                <span
+                  class="material-symbols-outlined text-3xl text-gray-400 group-hover:text-[#ff5508] transition-colors"
+                  >notifications_active</span
+                >
+              </div>
+              <div>
+                <h3 class="font-bold text-xl mb-2">Push, SMS &amp; RCS</h3>
+                <p class="text-sm text-gray-500 leading-relaxed">
+                  Canais diretos de ativação para impacto imediato e reforço
+                  estratégico.
+                </p>
+              </div>
+            </div>
+            <div
+              class="flex-shrink-0 w-[320px] mx-3 p-8 rounded-2xl bg-white dark:bg-[#1a1a1a] border border-gray-100 dark:border-gray-800 hover:border-orange-400/50 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group flex flex-col items-start gap-4"
+            >
+              <div
+                class="size-14 rounded-xl bg-gray-50 dark:bg-black flex items-center justify-center group-hover:bg-orange-50 transition-colors"
+              >
+                <span
+                  class="material-symbols-outlined text-3xl text-gray-400 group-hover:text-[#ff5508] transition-colors"
+                  >person_celebrate</span
+                >
+              </div>
+              <div>
+                <h3 class="font-bold text-xl mb-2">Influenciadores</h3>
+                <p class="text-sm text-gray-500 leading-relaxed">
+                  Autoridade aplicada para reduzir objeção e ampliar percepção
+                  de valor.
+                </p>
+              </div>
+            </div>
+            <div
+              class="flex-shrink-0 w-[320px] mx-3 p-8 rounded-2xl bg-white dark:bg-[#1a1a1a] border border-gray-100 dark:border-gray-800 hover:border-orange-400/50 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group flex flex-col items-start gap-4"
+            >
+              <div
+                class="size-14 rounded-xl bg-gray-50 dark:bg-black flex items-center justify-center group-hover:bg-orange-50 transition-colors"
+              >
+                <span
+                  class="material-symbols-outlined text-3xl text-gray-400 group-hover:text-[#ff5508] transition-colors"
+                  >link</span
+                >
+              </div>
+              <div>
+                <h3 class="font-bold text-xl mb-2">Afiliados</h3>
+                <p class="text-sm text-gray-500 leading-relaxed">
+                  Modelo orientado a performance dentro de uma lógica integrada.
+                </p>
+              </div>
+            </div>
+            <div
+              class="flex-shrink-0 w-[320px] mx-3 p-8 rounded-2xl bg-white dark:bg-[#1a1a1a] border border-gray-100 dark:border-gray-800 hover:border-orange-400/50 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group flex flex-col items-start gap-4"
+            >
+              <div
+                class="size-14 rounded-xl bg-gray-50 dark:bg-black flex items-center justify-center group-hover:bg-orange-50 transition-colors"
+              >
+                <span
+                  class="material-symbols-outlined text-3xl text-gray-400 group-hover:text-[#ff5508] transition-colors"
+                  >ads_click</span
+                >
+              </div>
+              <div>
+                <h3 class="font-bold text-xl mb-2">Gestão de Tráfego</h3>
+                <p class="text-sm text-gray-500 leading-relaxed">
+                  Operação coordenada dentro da arquitetura estratégica definida
+                  no diagnóstico.
+                </p>
+              </div>
+            </div>
+            <!-- DUPLICATE SET -->
+            <div
+              class="flex-shrink-0 w-[320px] mx-3 p-8 rounded-2xl bg-white dark:bg-[#1a1a1a] border border-gray-100 dark:border-gray-800 hover:border-orange-400/50 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group flex flex-col items-start gap-4"
+            >
+              <div
+                class="size-14 rounded-xl bg-gray-50 dark:bg-black flex items-center justify-center group-hover:bg-orange-50 transition-colors"
+              >
+                <span
+                  class="material-symbols-outlined text-3xl text-gray-400 group-hover:text-[#ff5508] transition-colors"
+                  >extension</span
+                >
+              </div>
+              <div>
+                <h3 class="font-bold text-xl mb-2">Mídia Programática</h3>
+                <p class="text-sm text-gray-500 leading-relaxed">
+                  Ativação estruturada para gerar alcance qualificado e reforçar
+                  consistência.
+                </p>
+              </div>
+            </div>
+            <div
+              class="flex-shrink-0 w-[320px] mx-3 p-8 rounded-2xl bg-white dark:bg-[#1a1a1a] border border-gray-100 dark:border-gray-800 hover:border-orange-400/50 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group flex flex-col items-start gap-4"
+            >
+              <div
+                class="size-14 rounded-xl bg-gray-50 dark:bg-black flex items-center justify-center group-hover:bg-orange-50 transition-colors"
+              >
+                <span
+                  class="material-symbols-outlined text-3xl text-gray-400 group-hover:text-[#ff5508] transition-colors"
+                  >smartphone</span
+                >
+              </div>
+              <div>
+                <h3 class="font-bold text-xl mb-2">Mobile (MMP)</h3>
+                <p class="text-sm text-gray-500 leading-relaxed">
+                  Aquisição orientada a dados para apps, conectando instalação e
+                  retenção.
+                </p>
+              </div>
+            </div>
+            <div
+              class="flex-shrink-0 w-[320px] mx-3 p-8 rounded-2xl bg-white dark:bg-[#1a1a1a] border border-gray-100 dark:border-gray-800 hover:border-orange-400/50 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group flex flex-col items-start gap-4"
+            >
+              <div
+                class="size-14 rounded-xl bg-gray-50 dark:bg-black flex items-center justify-center group-hover:bg-orange-50 transition-colors"
+              >
+                <span
+                  class="material-symbols-outlined text-3xl text-gray-400 group-hover:text-[#ff5508] transition-colors"
+                  >mail</span
+                >
+              </div>
+              <div>
+                <h3 class="font-bold text-xl mb-2">E-mail Marketing</h3>
+                <p class="text-sm text-gray-500 leading-relaxed">
+                  Base segmentada e ativação direcionada para conversão e
+                  reativação.
+                </p>
+              </div>
+            </div>
+            <div
+              class="flex-shrink-0 w-[320px] mx-3 p-8 rounded-2xl bg-white dark:bg-[#1a1a1a] border border-gray-100 dark:border-gray-800 hover:border-orange-400/50 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group flex flex-col items-start gap-4"
+            >
+              <div
+                class="size-14 rounded-xl bg-gray-50 dark:bg-black flex items-center justify-center group-hover:bg-orange-50 transition-colors"
+              >
+                <span
+                  class="material-symbols-outlined text-3xl text-gray-400 group-hover:text-[#ff5508] transition-colors"
+                  >notifications_active</span
+                >
+              </div>
+              <div>
+                <h3 class="font-bold text-xl mb-2">Push, SMS &amp; RCS</h3>
+                <p class="text-sm text-gray-500 leading-relaxed">
+                  Canais diretos de ativação para impacto imediato e reforço
+                  estratégico.
+                </p>
+              </div>
+            </div>
+            <div
+              class="flex-shrink-0 w-[320px] mx-3 p-8 rounded-2xl bg-white dark:bg-[#1a1a1a] border border-gray-100 dark:border-gray-800 hover:border-orange-400/50 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group flex flex-col items-start gap-4"
+            >
+              <div
+                class="size-14 rounded-xl bg-gray-50 dark:bg-black flex items-center justify-center group-hover:bg-orange-50 transition-colors"
+              >
+                <span
+                  class="material-symbols-outlined text-3xl text-gray-400 group-hover:text-[#ff5508] transition-colors"
+                  >person_celebrate</span
+                >
+              </div>
+              <div>
+                <h3 class="font-bold text-xl mb-2">Influenciadores</h3>
+                <p class="text-sm text-gray-500 leading-relaxed">
+                  Autoridade aplicada para reduzir objeção e ampliar percepção
+                  de valor.
+                </p>
+              </div>
+            </div>
+            <div
+              class="flex-shrink-0 w-[320px] mx-3 p-8 rounded-2xl bg-white dark:bg-[#1a1a1a] border border-gray-100 dark:border-gray-800 hover:border-orange-400/50 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group flex flex-col items-start gap-4"
+            >
+              <div
+                class="size-14 rounded-xl bg-gray-50 dark:bg-black flex items-center justify-center group-hover:bg-orange-50 transition-colors"
+              >
+                <span
+                  class="material-symbols-outlined text-3xl text-gray-400 group-hover:text-[#ff5508] transition-colors"
+                  >link</span
+                >
+              </div>
+              <div>
+                <h3 class="font-bold text-xl mb-2">Afiliados</h3>
+                <p class="text-sm text-gray-500 leading-relaxed">
+                  Modelo orientado a performance dentro de uma lógica integrada.
+                </p>
+              </div>
+            </div>
+            <div
+              class="flex-shrink-0 w-[320px] mx-3 p-8 rounded-2xl bg-white dark:bg-[#1a1a1a] border border-gray-100 dark:border-gray-800 hover:border-orange-400/50 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group flex flex-col items-start gap-4"
+            >
+              <div
+                class="size-14 rounded-xl bg-gray-50 dark:bg-black flex items-center justify-center group-hover:bg-orange-50 transition-colors"
+              >
+                <span
+                  class="material-symbols-outlined text-3xl text-gray-400 group-hover:text-[#ff5508] transition-colors"
+                  >ads_click</span
+                >
+              </div>
+              <div>
+                <h3 class="font-bold text-xl mb-2">Gestão de Tráfego</h3>
+                <p class="text-sm text-gray-500 leading-relaxed">
+                  Operação coordenada dentro da arquitetura estratégica definida
+                  no diagnóstico.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- NA PRÁTICA / SCENARIOS -->
+      <section
+        class="py-16 bg-[#F5F5F7] overflow-hidden relative"
+        id="scenarios"
+      >
+        <!-- Background -->
+        <div class="absolute inset-0 pointer-events-none">
+          <div
+            class="absolute inset-0 bg-[repeating-linear-gradient(45deg,#00000008_0px,#00000008_1px,transparent_1px,transparent_12px)]"
+          ></div>
+          <div
+            class="absolute top-0 right-0 w-[800px] h-[800px] bg-gradient-to-bl from-gray-200/50 via-white/50 to-transparent rounded-full blur-[100px] -z-10 opacity-60"
+          ></div>
+          <div
+            class="absolute bottom-0 left-0 w-[600px] h-[600px] bg-gradient-to-tr from-gray-200/50 via-white/50 to-transparent rounded-full blur-[80px] -z-10 opacity-60"
+          ></div>
+        </div>
+        <div class="max-w-[1280px] mx-auto px-5 md:px-10">
+          <div
+            class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start"
+          >
+            <div class="lg:col-span-4 lg:sticky lg:top-32 pt-8">
+              <div class="relative">
+                <span
+                  class="absolute -top-10 -left-6 text-[120px] font-black text-gray-200/50 select-none z-0 leading-none overflow-hidden"
+                  aria-hidden="true"
+                  >#</span
+                >
+                <h2
+                  class="relative z-10 text-3xl md:text-5xl font-black mb-6 tracking-tighter text-[#1d1d1f] leading-[0.95]"
+                >
+                  Na
+                  <span
+                    class="bg-gradient-to-r from-primary to-[#ff8a00] bg-clip-text text-transparent"
+                    >prática.</span
+                  >
+                </h2>
+              </div>
+              <p
+                class="text-lg md:text-xl text-[#86868b] font-medium leading-relaxed max-w-sm"
+              >
+                Da <span class="text-[#1d1d1f] font-bold">estratégia</span> à
+                operação: como o mesmo método se aplica a realidades diferentes
+                com
+                <span class="text-[#1d1d1f] font-bold"
+                  >resultados consistentes.</span
+                >
+              </p>
+            </div>
+            <div class="lg:col-span-8 relative flex items-center">
+              <div class="w-full">
+                <div
+                  id="scenariosTrack"
+                  class="h-[500px] overflow-y-auto scroll-smooth snap-y snap-mandatory flex flex-col gap-6 py-2 px-2"
+                >
+                  <!-- Banking -->
+                  <div
+                    class="snap-start shrink-0 min-h-[300px] h-auto p-8 rounded-[32px] bg-white shadow-[0_4px_24px_rgba(0,0,0,0.04)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)] transition-all duration-500 hover:-translate-y-1 flex flex-col justify-between group cursor-default border border-white/50"
+                  >
+                    <div>
+                      <div class="mb-4">
+                        <div
+                          class="size-12 rounded-2xl bg-[#f56300]/10 flex items-center justify-center mb-4"
+                        >
+                          <span
+                            class="material-symbols-outlined text-[#f56300] text-2xl"
+                            >account_balance</span
+                          >
+                        </div>
+                        <h3
+                          class="text-2xl font-bold text-[#1d1d1f] tracking-tight leading-tight"
+                        >
+                          Abertura de Contas &amp; Cartões
+                        </h3>
+                      </div>
+                      <p
+                        class="text-[#86868b] text-sm leading-relaxed font-medium"
+                      >
+                        Estrutura combinando mobile, email, afiliados e ativação
+                        segmentada para gerar aquisição qualificada em mercado
+                        dominado por grandes instituições. Coordenação entre
+                        topo e fundo de funil dentro de um sistema único de
+                        decisão.
+                      </p>
+                    </div>
+                    <div class="pt-6 border-t border-gray-100/50">
+                      <p
+                        class="text-xs font-bold uppercase tracking-wider text-[#f56300] mb-1"
+                      >
+                        Resultado
+                      </p>
+                      <p
+                        class="text-base font-semibold text-[#1d1d1f] leading-snug"
+                      >
+                        Crescimento consistente de novas contas com
+                        previsibilidade operacional.
+                      </p>
+                    </div>
+                  </div>
+                  <!-- iGaming -->
+                  <div
+                    class="snap-start shrink-0 min-h-[300px] h-auto p-8 rounded-[32px] bg-white shadow-[0_4px_24px_rgba(0,0,0,0.04)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)] transition-all duration-500 hover:-translate-y-1 flex flex-col justify-between group cursor-default border border-white/50"
+                  >
+                    <div>
+                      <div class="mb-4">
+                        <div
+                          class="size-12 rounded-2xl bg-[#f56300]/10 flex items-center justify-center mb-4"
+                        >
+                          <span
+                            class="material-symbols-outlined text-[#f56300] text-2xl"
+                            >sports_esports</span
+                          >
+                        </div>
+                        <h3
+                          class="text-2xl font-bold text-[#1d1d1f] tracking-tight leading-tight"
+                        >
+                          iGaming
+                        </h3>
+                      </div>
+                      <p
+                        class="text-[#86868b] text-sm leading-relaxed font-medium"
+                      >
+                        Integração entre afiliados, mídia programática e canais
+                        diretos de ativação para coordenar volume, retenção e
+                        controle de risco. Arquitetura orientada por dados em
+                        ambiente regulado e altamente competitivo.
+                      </p>
+                    </div>
+                    <div class="pt-6 border-t border-gray-100/50">
+                      <p
+                        class="text-xs font-bold uppercase tracking-wider text-[#f56300] mb-1"
+                      >
+                        Resultado
+                      </p>
+                      <p
+                        class="text-base font-semibold text-[#1d1d1f] leading-snug"
+                      >
+                        Escala sustentável com controle de qualidade do usuário.
+                      </p>
+                    </div>
+                  </div>
+                  <!-- Promoções -->
+                  <div
+                    class="snap-start shrink-0 min-h-[300px] h-auto p-8 rounded-[32px] bg-white shadow-[0_4px_24px_rgba(0,0,0,0.04)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)] transition-all duration-500 hover:-translate-y-1 flex flex-col justify-between group cursor-default border border-white/50"
+                  >
+                    <div>
+                      <div class="mb-4">
+                        <div
+                          class="size-12 rounded-2xl bg-[#f56300]/10 flex items-center justify-center mb-4"
+                        >
+                          <span
+                            class="material-symbols-outlined text-[#f56300] text-2xl"
+                            >campaign</span
+                          >
+                        </div>
+                        <h3
+                          class="text-2xl font-bold text-[#1d1d1f] tracking-tight leading-tight"
+                        >
+                          Promoções
+                        </h3>
+                      </div>
+                      <p
+                        class="text-[#86868b] text-sm leading-relaxed font-medium"
+                      >
+                        Arquitetura de mídia coordenada para campanhas
+                        promocionais de grande escala, combinando programática,
+                        mobile e ativação direta (push/rcs/sms). Foco em
+                        conversão massiva com controle de qualidade e
+                        estabilidade operacional.
+                      </p>
+                    </div>
+                    <div class="pt-6 border-t border-gray-100/50">
+                      <p
+                        class="text-xs font-bold uppercase tracking-wider text-[#f56300] mb-1"
+                      >
+                        Resultado
+                      </p>
+                      <p
+                        class="text-base font-semibold text-[#1d1d1f] leading-snug"
+                      >
+                        Geração consistente de milhares de participações
+                        qualificadas.
+                      </p>
+                    </div>
+                  </div>
+                  <!-- Crédito -->
+                  <div
+                    class="snap-start shrink-0 min-h-[300px] h-auto p-8 rounded-[32px] bg-white shadow-[0_4px_24px_rgba(0,0,0,0.04)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)] transition-all duration-500 hover:-translate-y-1 flex flex-col justify-between group cursor-default border border-white/50"
+                  >
+                    <div>
+                      <div class="mb-4">
+                        <div
+                          class="size-12 rounded-2xl bg-[#f56300]/10 flex items-center justify-center mb-4"
+                        >
+                          <span
+                            class="material-symbols-outlined text-[#f56300] text-2xl"
+                            >trending_up</span
+                          >
+                        </div>
+                        <h3
+                          class="text-2xl font-bold text-[#1d1d1f] tracking-tight leading-tight"
+                        >
+                          Crédito &amp; Recuperação
+                        </h3>
+                      </div>
+                      <p
+                        class="text-[#86868b] text-sm leading-relaxed font-medium"
+                      >
+                        Operação integrada entre geração de demanda e critérios
+                        de aprovação, conectando mídia, segmentação e canais
+                        diretos. Estratégia orientada à qualificação e conversão
+                        efetiva.
+                      </p>
+                    </div>
+                    <div class="pt-6 border-t border-gray-100/50">
+                      <p
+                        class="text-xs font-bold uppercase tracking-wider text-[#f56300] mb-1"
+                      >
+                        Resultado
+                      </p>
+                      <p
+                        class="text-base font-semibold text-[#1d1d1f] leading-snug"
+                      >
+                        Aumento de eficiência na conversão e melhor alinhamento
+                        entre aquisição e aprovação.
+                      </p>
+                    </div>
+                  </div>
+                  <!-- Montadoras -->
+                  <div
+                    class="snap-start shrink-0 min-h-[300px] h-auto p-8 rounded-[32px] bg-white shadow-[0_4px_24px_rgba(0,0,0,0.04)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)] transition-all duration-500 hover:-translate-y-1 flex flex-col justify-between group cursor-default border border-white/50"
+                  >
+                    <div>
+                      <div class="mb-4">
+                        <div
+                          class="size-12 rounded-2xl bg-[#f56300]/10 flex items-center justify-center mb-4"
+                        >
+                          <span
+                            class="material-symbols-outlined text-[#f56300] text-2xl"
+                            >directions_car</span
+                          >
+                        </div>
+                        <h3
+                          class="text-2xl font-bold text-[#1d1d1f] tracking-tight leading-tight"
+                        >
+                          Montadoras &amp; Test Drive
+                        </h3>
+                      </div>
+                      <p
+                        class="text-[#86868b] text-sm leading-relaxed font-medium"
+                      >
+                        Estratégia integrada para geração de leads qualificados,
+                        conectando awareness e ação direta. Coordenação entre
+                        mídia digital e intenção real de visita.
+                      </p>
+                    </div>
+                    <div class="pt-6 border-t border-gray-100/50">
+                      <p
+                        class="text-xs font-bold uppercase tracking-wider text-[#f56300] mb-1"
+                      >
+                        Resultado
+                      </p>
+                      <p
+                        class="text-base font-semibold text-[#1d1d1f] leading-snug"
+                      >
+                        Volume relevante de leads qualificados com controle de
+                        custo por oportunidade.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="snap-center shrink-0 h-[20px] w-full"></div>
+                </div>
+                <!-- Dots Navigation -->
+                <div class="flex justify-center gap-3 mt-6">
+                  <button
+                    class="nav-dot w-4 h-4 rounded-full bg-[#FF5722] transition-all border border-transparent"
+                    data-index="0"
+                  ></button>
+                  <button
+                    class="nav-dot w-4 h-4 rounded-full bg-white border border-gray-400 hover:border-[#FF5722] transition-all"
+                    data-index="1"
+                  ></button>
+                  <button
+                    class="nav-dot w-4 h-4 rounded-full bg-white border border-gray-400 hover:border-[#FF5722] transition-all"
+                    data-index="2"
+                  ></button>
+                  <button
+                    class="nav-dot w-4 h-4 rounded-full bg-white border border-gray-400 hover:border-[#FF5722] transition-all"
+                    data-index="3"
+                  ></button>
+                  <button
+                    class="nav-dot w-4 h-4 rounded-full bg-white border border-gray-400 hover:border-[#FF5722] transition-all"
+                    data-index="4"
+                  ></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTATO -->
+      <section
+        class="py-16 px-5 md:px-10 bg-black text-white relative overflow-hidden"
+        id="contato"
+      >
+        <div
+          class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/20 blur-[100px] rounded-full pointer-events-none -z-10 mix-blend-screen opacity-50"
+        ></div>
+        <div class="max-w-[1280px] mx-auto relative z-10">
+          <div
+            class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center"
+          >
+            <div class="text-left">
+              <h2
+                class="text-4xl md:text-5xl font-black leading-[0.95] mb-6 tracking-tighter text-white"
+              >
+                Seu mercado exige <span class="text-primary">integração.</span>
+              </h2>
+              <div
+                class="space-y-4 text-lg md:text-xl font-medium text-gray-400 mb-8 leading-relaxed max-w-lg"
+              >
+                <p>
+                  Se sua operação ainda funciona por canal, é hora de estruturar
+                  um sistema.
+                </p>
+                <p>
+                  Integração não é sobre ter mais mídia. É sobre tomar decisões
+                  melhores.
+                </p>
+              </div>
+              <div class="flex justify-start">
+                <a
+                  href="javascript:void(0)"
+                  target="_blank"
+                  class="inline-flex items-center gap-3 bg-[#25D366] hover:bg-[#20bd5a] active:scale-[0.98] transition-all text-white text-base font-bold px-6 py-3 rounded-full shadow-lg shadow-green-500/20 hover:scale-105 group"
+                >
+                  <span class="material-symbols-outlined text-xl">chat</span>
+                  Falar com a Adzappy no WhatsApp
+                </a>
+              </div>
+            </div>
+            <div
+              class="w-full bg-[#1c1c1e]/80 backdrop-blur-xl border border-white/10 p-6 md:p-8 rounded-[32px] shadow-2xl relative overflow-hidden"
+            >
+              <div class="mb-6">
+                <h3 class="text-2xl font-bold mb-2 tracking-tight">
+                  Prefere que a gente entre em contato?
+                </h3>
+                <p class="text-gray-400 text-sm">
+                  Preencha os dados abaixo e nosso time entrará em contato.
+                </p>
+              </div>
+              <form class="space-y-8 pt-4 pb-2" id="contactForm">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-6">
+                  <div class="relative">
+                    <input
+                      id="nome"
+                      type="text"
+                      placeholder=" "
+                      class="w-full border-0 border-b border-white/20 py-2 px-0 focus:ring-0 focus:border-b-2 focus:border-primary transition-colors focus:outline-none peer bg-transparent text-white placeholder-transparent"
+                    />
+                    <label
+                      for="nome"
+                      class="absolute left-0 top-2 cursor-text text-gray-500 transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:top-2 peer-focus:-top-4 peer-focus:text-[10px] peer-focus:text-primary peer-focus:font-bold uppercase text-[10px] font-bold -top-4 pointer-events-none"
+                      >Nome</label
+                    >
+                  </div>
+                  <div class="relative">
+                    <input
+                      id="empresa"
+                      type="text"
+                      placeholder=" "
+                      class="w-full border-0 border-b border-white/20 py-2 px-0 focus:ring-0 focus:border-b-2 focus:border-primary transition-colors focus:outline-none peer bg-transparent text-white placeholder-transparent"
+                    />
+                    <label
+                      for="empresa"
+                      class="absolute left-0 top-2 cursor-text text-gray-500 transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:top-2 peer-focus:-top-4 peer-focus:text-[10px] peer-focus:text-primary peer-focus:font-bold uppercase text-[10px] font-bold -top-4 pointer-events-none"
+                      >Empresa</label
+                    >
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-6">
+                  <div class="relative">
+                    <input
+                      id="email"
+                      type="email"
+                      placeholder=" "
+                      class="w-full border-0 border-b border-white/20 py-2 px-0 focus:ring-0 focus:border-b-2 focus:border-primary transition-colors focus:outline-none peer bg-transparent text-white placeholder-transparent"
+                    />
+                    <label
+                      for="email"
+                      class="absolute left-0 top-2 cursor-text text-gray-500 transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:top-2 peer-focus:-top-4 peer-focus:text-[10px] peer-focus:text-primary peer-focus:font-bold uppercase text-[10px] font-bold -top-4 pointer-events-none"
+                      >E-mail</label
+                    >
+                  </div>
+                  <div class="relative">
+                    <input
+                      id="telefone"
+                      type="tel"
+                      placeholder=" "
+                      class="w-full border-0 border-b border-white/20 py-2 px-0 focus:ring-0 focus:border-b-2 focus:border-primary transition-colors focus:outline-none peer bg-transparent text-white placeholder-transparent"
+                    />
+                    <label
+                      for="telefone"
+                      class="absolute left-0 top-2 cursor-text text-gray-500 transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:top-2 peer-focus:-top-4 peer-focus:text-[10px] peer-focus:text-primary peer-focus:font-bold uppercase text-[10px] font-bold -top-4 pointer-events-none"
+                      >Telefone</label
+                    >
+                  </div>
+                </div>
+
+                <div class="relative">
+                  <select
+                    id="segmento"
+                    required
+                    class="w-full border-0 border-b border-white/20 py-2 px-0 focus:ring-0 focus:border-b-2 focus:border-primary transition-colors focus:outline-none bg-transparent text-white focus:text-white invalid:text-gray-500 cursor-pointer"
+                  >
+                    <option value="" disabled selected hidden>
+                      Selecione uma opção...
+                    </option>
+                    <option value="ecommerce" class="bg-[#1c1c1e] text-white">
+                      E-commerce
+                    </option>
+                    <option value="saas" class="bg-[#1c1c1e] text-white">
+                      SaaS
+                    </option>
+                    <option value="fintech" class="bg-[#1c1c1e] text-white">
+                      Fintech
+                    </option>
+                    <option value="leadgen" class="bg-[#1c1c1e] text-white">
+                      Geração de Leads
+                    </option>
+                    <option value="other" class="bg-[#1c1c1e] text-white">
+                      Outro
+                    </option>
+                  </select>
+                  <label
+                    for="segmento"
+                    class="absolute left-0 -top-4 cursor-pointer text-gray-500 transition-all text-[10px] font-bold uppercase pointer-events-none"
+                    >Segmento
+                    <span class="text-gray-600 normal-case font-normal"
+                      >(opcional)</span
+                    ></label
+                  >
+                </div>
+
+                <div class="relative">
+                  <textarea
+                    id="desafio"
+                    placeholder=" "
+                    class="w-full border-0 border-b border-white/20 py-2 px-0 focus:ring-0 focus:border-b-2 focus:border-primary transition-colors focus:outline-none peer bg-transparent text-white placeholder-transparent min-h-[60px] resize-y"
+                  ></textarea>
+                  <label
+                    for="desafio"
+                    class="absolute left-0 top-2 cursor-text text-gray-500 transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:top-2 peer-focus:-top-4 peer-focus:text-[10px] peer-focus:text-primary peer-focus:font-bold uppercase text-[10px] font-bold -top-4 pointer-events-none"
+                    >Breve descrição do desafio</label
+                  >
+                </div>
+
+                <button
+                  type="submit"
+                  class="w-full cursor-pointer rounded-xl h-12 bg-[#ff5508] hover:bg-[#e04804] hover:scale-[1.02] active:scale-[0.98] transition-all text-white font-bold text-base shadow-lg shadow-orange-500/20 mt-6 !mt-10"
+                >
+                  Quero estruturar minha mídia
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FOOTER -->
+      <footer class="py-8 bg-black border-t border-white/5 relative z-10">
+        <div
+          class="max-w-[1280px] mx-auto px-5 md:px-10 flex flex-col md:flex-row items-center justify-between gap-4"
+        >
+          <div class="flex items-center gap-2">
+            <a href="#" aria-label="Início"
+              ><img
+                src="https://adzappy.com/imgs/logo-ho.png"
+                alt="Adzappy Logo"
+                class="h-6 w-auto opacity-80 hover:opacity-100 transition-opacity"
+            /></a>
+          </div>
+          <p
+            class="text-xs text-gray-500 font-medium text-center md:text-right"
+          >
+            &copy; 2026 Adzappy. Todos os direitos reservados.
+          </p>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
